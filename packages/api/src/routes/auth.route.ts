@@ -15,15 +15,15 @@ export default class AuthRoute {
 
   initializeRoutes() {
     // login
-    this.router.post(
-      `${this.path}/login`,
-      useCatchErrors(this.authService.login.bind(this.authService))
+    this.router.get(
+      `${this.path}/google`,
+      useCatchErrors(this.authService.googleAuth.bind(this.authService))
     );
 
-    // otp auth
-    this.router.post(
-      `${this.path}/otp-auth`,
-      useCatchErrors(this.authService.otpAuth.bind(this.authService))
+    // handle google callback
+    this.router.get(
+      `${this.path}/google/callback`,
+      useCatchErrors(this.authService.googleAuthCallback.bind(this.authService))
     );
   }
 }
