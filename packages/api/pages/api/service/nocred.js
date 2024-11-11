@@ -2,8 +2,14 @@ import redisClient from "../config/redis";
 import { calculateExpirationTimestamp, decrypt, encrypt } from "../helper";
 import SendResponse from "../helper/sendResponse";
 import { uuid } from "../helper/index";
-import { createUrlSchema, getUrlSchema } from "../helper/validate";
+import { createUrlSchema } from "../helper/validate";
+import redisClient from "../config/redis";
+import { calculateExpirationTimestamp, decrypt, encrypt } from "../helper";
+import SendResponse from "../helper/sendResponse";
+import { uuid } from "../helper/index";
+import { createUrlSchema } from "../helper/validate";
 
+export default class Nocred extends SendResponse {
 export default class Nocred extends SendResponse {
   constructor() {
     super();
@@ -33,61 +39,43 @@ export default class Nocred extends SendResponse {
     );
 
     const userId = payload?.userId;
-    const url_Id = uuid(8);
-    const cacheKey = url_Id; // [userid, urlId]
+    const urlId = uuid(8);
+    const cacheKey = `${userId}_${urlId}`; // [userid, urlId]
     const cacheData = {
       userId,
-      url_Id,
+      urlId,
       expiration,
       encSession: encrypt(payload?.sessionId),
     };
 
-    // console.log(cacheData, cacheKey);
+    console.log(cacheData, cacheKey);
 
-    await redisClient.set(cacheKey, JSON.stringify(cacheData), {
-      EX: new Date(expiration).getTime(),
-    });
-
-    // console.log({ data: await redisClient.get(cacheKey) });
-
-    this.success(
-      res,
-      "--createUrl/success",
-      "secure url created successsfully",
-      200,
-      cacheData
+    redisClient.set(
+      cacheKey,
+      JSON.stringify(cacheData),
+      {
+        EX: expiration,
+      },
+      (err) => {
+        if (err) {
+          return this.error(
+            res,
+            "--createUrl/redis-server",
+            "failed to save url.",
+            400
+          );
+        }
+        this.success(
+          res,
+          "--createUrl/success",
+          "secure url created successsfully",
+          200
+        );
+      }
     );
   }
 
-  async getUrl(res, payload) {
-    const { error } = getUrlSchema.validate(payload);
-    if (error) {
-      return this.error(res, "--getUrl/invalid-field", error?.message, 400);
-    }
-
-    const { id } = payload;
-    const urlInfo = await redisClient.get(id);
-
-    if (urlInfo === null) {
-      return this.error(res, "--getUrl/notfound", "url not found", 404);
-    }
-
-    const data = JSON.parse(urlInfo);
-    let sessionId;
-
-    try {
-      sessionId = decrypt(data?.encSession);
-    } catch (e) {
-      console.log(`[DECRYPTION ERROR]: ${e.message}`);
-      this.error(res, "--getUrl/invalid-session", "invalid url", 500);
-      return;
-    }
-
-    this.success(res, "--getUrl/success", "successfully fetched url", 200, {
-      sessionId,
-      userId: data.userId,
-    });
-  }
+  async getAllUrl() {}
 
   async deleteUrl() {}
 }
