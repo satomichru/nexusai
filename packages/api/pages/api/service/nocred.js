@@ -3,7 +3,13 @@ import { calculateExpirationTimestamp, decrypt, encrypt } from "../helper";
 import SendResponse from "../helper/sendResponse";
 import { uuid } from "../helper/index";
 import { createUrlSchema } from "../helper/validate";
+import redisClient from "../config/redis";
+import { calculateExpirationTimestamp, decrypt, encrypt } from "../helper";
+import SendResponse from "../helper/sendResponse";
+import { uuid } from "../helper/index";
+import { createUrlSchema } from "../helper/validate";
 
+export default class Nocred extends SendResponse {
 export default class Nocred extends SendResponse {
   constructor() {
     super();
