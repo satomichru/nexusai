@@ -1,18 +1,19 @@
 # NexusAI
 
+A platform which provides 24/7 availability customer supports, act as a spam/scam blocker for businesses or individual, acts as your AI receptionist or sales representative / call centre.
+
 A platform which enables businesses integrate their business and provides a way to automate the process of either:
 
-- Integrate third parties platforms
 - Booking an appointment
 - scheduling a meeting
-- ~~Placing an order ( a node base UI would be use to plan the automation. )~~
+- Placing an order ( a node base UI would be use to plan the automation. )~~
 - Answer questions and answers based on the resources uploaded from the business or used the data provided by the businesses
 - Provides a chatbot embaddable widget
 - Set available time ( necessary especially if businesses need to prevent user from scheduling a meet on a day they aren’t available )
 
 It also Provides a sell phone number users could call to perform some of the functions above.
 
-Businesses could set some configurations as well which tells the AI if a caller or user could attempt an action
+Businesses could set some configurations as well which tells the AI if a caller or user could attempt an action. (still giving this a thought)
 
 ## Frontend
 
@@ -112,3 +113,5 @@ Add third party integrations.
 
 - Whatsapp (still giving this a thought)
   provides a way to send messages to the user via whatsapp since sms could be expensive.
+
+For converting site content into valid markdown, we could use [html-to-markdown](https://github.com/mixmark-io/turndown) npm package. Or perhaps using a small cloudflare LLM worker to convert the content into markdown [cloudflare LLM](https://developers.cloudflare.com/workers-ai/models/qwen1.5-14b-chat-awq/)
