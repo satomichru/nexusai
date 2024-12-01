@@ -1,42 +1,30 @@
-# Prospark - Backend
+# React + TypeScript + Vite
 
-This is a `Nextjs` project bootstrapped with [`create-prospark-app`](https://github.com/benrobo/prospark).
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Getting Started
+Currently, two official plugins are available:
 
-First, run the development server:
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Expanding the ESLint configuration
 
-The following log message should be displayed in console output:
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-```bash
-2023-04-17 23:14:38 PM [info] : Server started at http://localhost:8080
-```
-
-Visit `http://localhost:8080/api/user/data` in your browser just to confirm routes are configured and working properly. If all is working properly, you should get the below response on browser.
+- Configure the top-level `parserOptions` property like this:
 
 ```js
-{
-  "errorStatus": false,
-  "code": "--user/fake-data",
-  "message": "user data fetched successfully",
-  "statusCode": 200,
-  "data": [
-    {
-      "name": "john doe",
-      "email": "john@mail.com"
-    },
-    {
-      "name": "brain tracy",
-      "email": "brian@mail.com"
-    }
-  ]
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
 }
 ```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
