@@ -1,6 +1,12 @@
 import { CatchErrors } from "../middlewares/error";
 import Nocred from "../service/nocred";
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 const noCredService = new Nocred();
 
 async function handler(req, res, next) {
