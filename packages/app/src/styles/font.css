@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: "--poppins-light";
+  src: url("/assets/fonts/poppins/Poppins-Light.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "--poppins-medium";
   src: url("/assets/fonts/poppins/Poppins-Medium.ttf") format("truetype");
 }
@@ -32,7 +37,11 @@
   font-family: "--poppins-regular";
 }
 
-.font-ppMed {
+.font-ppL {
+  font-family: "--poppins-light";
+}
+
+.font-ppM {
   font-family: "--poppins-medium";
 }
 

@@ -1,7 +1,7 @@
 import useSession from "@/hooks/useSession";
 import React from "react";
 
-export default function Dashboard() {
+export default function Inbox() {
   const data = useSession();
-  return <div className="w-full">children</div>;
+  return <div className="w-full">Inbox</div>;
 }

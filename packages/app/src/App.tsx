@@ -7,8 +7,11 @@ import useTheme from "./hooks/useTheme";
 import { Toaster } from "react-hot-toast";
 import DataContextProvider from "./context/DataContext";
 import "@styles/global.css";
-import DashboardLayout from "./components/dashboard/layout";
 import Dashboard from "./pages/dashboard";
+import DashboardLayout from "./components/dashboard/layout";
+import Inbox from "./pages/inbox";
+import KnowledgeBase from "./pages/knowledge-base";
+import Integration from "./pages/integration";
 
 // tanstack reqct query
 const queryClient = new QueryClient();
@@ -25,8 +28,12 @@ function App() {
             <Route element={<AuthRootLayout />}>
               <Route path="/auth" element={<AuthPage />} />
             </Route>
+
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/inbox" element={<Inbox />} />
+              <Route path="/knowledge-base" element={<KnowledgeBase />} />
+              <Route path="/integration" element={<Integration />} />
             </Route>
           </Routes>
           <Toaster />

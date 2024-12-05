@@ -28,7 +28,7 @@ module.exports = {
         },
         dark: {
           100: "#1c1c1e",
-          102: "#252527",
+          102: "#22242a",
           103: "#111013",
           105: "#000",
           200: "#16181d",
@@ -72,6 +72,8 @@ module.exports = {
         },
         purple: {
           100: "#8f63f3",
+          102: "#6210cc",
+          103: "#6e21d2",
           105: "rgb(143, 99, 243,.3)",
         },
         teal: {
@@ -136,10 +138,10 @@ module.exports = {
         ppB: ["var(--poppins-bold)"],
         ppEB: ["var(--poppins-extrabold)"],
         ppReg: ["var(--poppins-regular)"],
+        ppL: ["var(--poppins-light)"],
         ppM: ["var(--poppins-medium)"],
         rubik: ["var(--rubik-mono)"],
         inter: ["var(--font-inter)"],
-        // jb: ["var(--font-jb)"],
         jb: ["var(--jb-mono)"],
       },
     },
